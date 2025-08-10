@@ -10,8 +10,10 @@ app = Flask(__name__)
 clf_model = joblib.load("avocado_classification_model.pkl")
 reg_model = joblib.load("avocado_regression_model.pkl")
 
-# Load dataframe to get regions (for dropdown)
-df = pd.read_csv("C:/Users/Dorepally Tejasree/OneDrive/Desktop/DT/render/avocado.csv", index_col=0)
+# Load dataframe to get regions (for dropdown) using relative path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, 'avocado.csv')
+df = pd.read_csv(csv_path, index_col=0)
 regions = sorted(df['region'].unique())
 
 # List numeric feature names (same as used in model)
